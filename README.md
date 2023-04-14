@@ -1,12 +1,10 @@
 # norisis-sat
 
-Librería de timbrado SAT versón 3.3 integrado con SeFactura. 
+Librería de timbrado SAT versón 4.0 integrado con SeFactura. 
 
 Funciones:
 
 - Timbrado
-- Lectura de XML
-
 
 
 # Maven
