@@ -6,9 +6,9 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
     http://jaxb2-commons.dev.java.net/namespace-prefix https://raw.githubusercontent.com/Siggen/jaxb2-namespace-prefix/master/src/main/resources/prefix-namespace-schema.xsd">
 
-    <jxb:bindings schemaLocation="cfdv33.xsd">
+    <jxb:bindings schemaLocation="cfdv40.xsd">
         <jxb:schemaBindings>
-            <jxb:package name="mx.gob.sat.cfd._3" />
+            <jxb:package name="mx.gob.sat.cfd._4" />
         </jxb:schemaBindings>
         <jxb:bindings>
             <namespace:prefix name="cfdi" />
@@ -16,12 +16,12 @@
             <namespace:prefix name="xsi" namespaceURI="http://www.w3.org/2001/XMLSchema-instance" />
         </jxb:bindings>
     </jxb:bindings>
-      <jxb:bindings schemaLocation="Pagos10.xsd">
+      <jxb:bindings schemaLocation="Pagos20.xsd">
         <jxb:schemaBindings>
             <jxb:package name="mx.gob.sat.pagos" />
         </jxb:schemaBindings>
         <jxb:bindings>
-            <namespace:prefix name="pago10" />
+            <namespace:prefix name="pago20" />
             <!-- Additional @XmlNs prefix declarations to take effect for this schema/package -->
             <namespace:prefix name="xsi" namespaceURI="http://www.w3.org/2001/XMLSchema-instance" />
         </jxb:bindings>

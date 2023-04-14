@@ -7,7 +7,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
 	version="2.1">
 	
-	<jaxb:bindings schemaLocation="cfdv33.xsd" node="/xs:schema">
+	<jaxb:bindings schemaLocation="cfdv40.xsd" node="/xs:schema">
 		<jaxb:bindings  node="//xs:element[@name='Complemento']">					
 			<annox:annotate target="class">
                 

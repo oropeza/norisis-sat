@@ -108,8 +108,8 @@
 			    <configuration>
 			        <schemaDirectory>src/main/resources</schemaDirectory>			        
 			        <schemaIncludes>
-			            <include>cfdv33.xsd</include>
-			            <include>Pagos10.xsd</include>			            
+			            <include>cfdv40.xsd</include>
+			            <include>Pagos20.xsd</include>		            
 			            <include>TimbreFiscalDigitalv11.xsd</include>
 			            
 			        </schemaIncludes>
