@@ -9,9 +9,9 @@ import com.norisoft.sat.ComprobanteHelper;
 import com.norisoft.sat.constantes.TipoImpuesto;
 
 import lombok.Data;
-import mx.gob.sat.cfd._3.Comprobante;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado;
+import mx.gob.sat.cfd._4.Comprobante;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado;
 import mx.gob.sat.timbrefiscaldigital.TimbreFiscalDigital;
 
 @Data

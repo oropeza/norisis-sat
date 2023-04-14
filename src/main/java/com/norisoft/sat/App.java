@@ -1,8 +1,8 @@
 package com.norisoft.sat;
 
 
-import mx.gob.sat.cfd._3.Comprobante;
-import mx.gob.sat.cfd._3.Comprobante.Addenda;
+import mx.gob.sat.cfd._4.Comprobante;
+import mx.gob.sat.cfd._4.Comprobante.Addenda;
 import mx.gob.sat.sitio_internet.cfd.catalogos.CTipoFactor;
 
 

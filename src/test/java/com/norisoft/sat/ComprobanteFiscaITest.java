@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import mx.gob.sat.cfd._3.Comprobante;
+import mx.gob.sat.cfd._4.Comprobante;
 import mx.gob.sat.sitio_internet.cfd.catalogos.CTipoFactor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

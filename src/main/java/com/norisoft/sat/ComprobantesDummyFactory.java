@@ -14,15 +14,15 @@ import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import mx.gob.sat.cfd._3.Comprobante;
-import mx.gob.sat.cfd._3.ObjectFactory;
-import mx.gob.sat.cfd._3.Comprobante.CfdiRelacionados.CfdiRelacionado;
-import mx.gob.sat.cfd._3.Comprobante.Complemento;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos;
-import mx.gob.sat.cfd._3.Comprobante.Emisor;
-import mx.gob.sat.cfd._3.Comprobante.Receptor;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos.Traslados;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado;
+import mx.gob.sat.cfd._4.Comprobante;
+import mx.gob.sat.cfd._4.ObjectFactory;
+import mx.gob.sat.cfd._4.Comprobante.CfdiRelacionados.CfdiRelacionado;
+import mx.gob.sat.cfd._4.Comprobante.Complemento;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos;
+import mx.gob.sat.cfd._4.Comprobante.Emisor;
+import mx.gob.sat.cfd._4.Comprobante.Receptor;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos.Traslados;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado;
 import mx.gob.sat.pagos.Pagos;
 import mx.gob.sat.pagos.Pagos.Pago;
 import mx.gob.sat.pagos.Pagos.Pago.DoctoRelacionado;
@@ -105,7 +105,7 @@ public class ComprobantesDummyFactory {
 		        c.setValorUnitario(new BigDecimal(20000));
 		        c.setImporte(new BigDecimal(20000));
 		        
-		        c.setImpuestos(new mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos());
+		        c.setImpuestos(new mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos());
 		        c.getImpuestos().setTraslados(new Traslados());
 		        
 		         		        
@@ -127,10 +127,10 @@ public class ComprobantesDummyFactory {
 	        	        
 	        conceptos.getConcepto().add(c);
 	        
-	        comprobante.setImpuestos(new mx.gob.sat.cfd._3.Comprobante.Impuestos());
-	        comprobante.getImpuestos().setTraslados(new mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados() );
+	        comprobante.setImpuestos(new mx.gob.sat.cfd._4.Comprobante.Impuestos());
+	        comprobante.getImpuestos().setTraslados(new mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados() );
 	        
-	        mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados.Traslado tra = new mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados.Traslado();
+	        mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados.Traslado tra = new mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados.Traslado();
 	        tra.setImpuesto("002");
 	        tra.setTipoFactor(CTipoFactor.TASA);
 	        tra.setTasaOCuota(new BigDecimal("0.160000"));
@@ -322,9 +322,9 @@ public class ComprobantesDummyFactory {
 	        CfdiRelacionado cfdi =  factory.createComprobanteCfdiRelacionadosCfdiRelacionado();
 	        cfdi.setUUID("29D2BC9D-57B2-4E76-B5A2-41587525B521");
 	        
-	        comprobante.setCfdiRelacionados(factory.createComprobanteCfdiRelacionados());
-	        comprobante.getCfdiRelacionados().getCfdiRelacionado().add(cfdi);
-	        comprobante.getCfdiRelacionados().setTipoRelacion("04");
+	        //comprobante.setCfdiRelacionados(factory.createComprobanteCfdiRelacionados());
+	        //comprobante.getCfdiRelacionados() .getCfdiRelacionado().add(cfdi);
+	        //comprobante.getCfdiRelacionados().setTipoRelacion("04");
 	        
 
 	        Conceptos.Concepto conceptoPago = new  Conceptos.Concepto();
@@ -360,7 +360,7 @@ public class ComprobantesDummyFactory {
 	        DoctoRelacionado relacionado = pagosFactory.createPagosPagoDoctoRelacionado();
 	        relacionado.setIdDocumento("29D2BC9D-57B2-4E76-B5A2-41587525B521");
 	        relacionado.setMonedaDR(CMoneda.MXN);
-	        relacionado.setMetodoDePagoDR(CMetodoPago.PPD);
+	      //  relacionado.setMetodoDePagoDR(CMetodoPago.PPD);
 	        relacionado.setNumParcialidad(BigInteger.ONE);
 	        relacionado.setImpSaldoAnt(new BigDecimal("23200"));
 	        relacionado.setImpPagado(new BigDecimal("23200"));
@@ -377,7 +377,7 @@ public class ComprobantesDummyFactory {
 	        Complemento complemento =  new Complemento();	
 	        
 	        complemento.getAny().add(pagos);
-	        comprobante.getComplemento().add(complemento);
+	    //    comprobante.getComplemento().add(complemento);
 	         
 
 	        

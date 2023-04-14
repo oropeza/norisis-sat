@@ -9,9 +9,9 @@ import java.util.List;
 import com.norisoft.sat.constantes.TipoImpuesto;
 
 import lombok.Data;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos.Retenciones.Retencion;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos.Retenciones.Retencion;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado;
 
 @Data
 public class ConceptoView {

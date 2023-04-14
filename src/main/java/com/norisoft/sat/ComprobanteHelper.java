@@ -8,13 +8,13 @@ import java.util.List;
 import com.norisoft.sat.constantes.TipoFactor;
 import com.norisoft.sat.constantes.TipoImpuesto;
 
-import mx.gob.sat.cfd._3.Comprobante;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto;
-import mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados;
-import mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados.Traslado;
-import mx.gob.sat.cfd._3.Comprobante.Impuestos.Retenciones;
-import mx.gob.sat.cfd._3.Comprobante.Impuestos.Retenciones.Retencion;
+import mx.gob.sat.cfd._4.Comprobante;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto;
+import mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados;
+import mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados.Traslado;
+import mx.gob.sat.cfd._4.Comprobante.Impuestos.Retenciones;
+import mx.gob.sat.cfd._4.Comprobante.Impuestos.Retenciones.Retencion;
 import mx.gob.sat.sitio_internet.cfd.catalogos.CTipoFactor;
 import mx.gob.sat.timbrefiscaldigital.TimbreFiscalDigital;
 
@@ -54,7 +54,7 @@ public class ComprobanteHelper {
 	       
 	       if(tipoImpuesto!=null && tipoImpuesto.equals(TipoImpuesto.IMPUESTO_002.clave)) { //IVA
 	    	   
-	    	   c.setImpuestos(new mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos());
+	    	   c.setImpuestos(new mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos());
 		       c.getImpuestos().setTraslados(new Comprobante.Conceptos.Concepto.Impuestos.Traslados());
 		       
 	    	   Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado traslado =  new Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado();
@@ -132,7 +132,7 @@ public class ComprobanteHelper {
 		   c.setCantidad(cantidad);
 		   c.setImporte(c.getCantidad().multiply(c.getValorUnitario()).setScale(6, RoundingMode.HALF_UP));
 		   
-		   c.setImpuestos(new mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos());
+		   c.setImpuestos(new mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos());
 	
 	        
 	        if(comprobante.getConceptos()==null)comprobante.setConceptos(new Conceptos());
@@ -146,7 +146,7 @@ public class ComprobanteHelper {
 	
 	public static TimbreFiscalDigital obtenerTimbreFiscalDigital(Comprobante comprobante) {
 
-		List<Object> complementos = comprobante.getComplemento().get(0).getAny();		
+		List<Object> complementos = comprobante.getComplemento().getAny(); //.get(0).getAny();		
 		for (Object object : complementos) {
 			if(object.getClass().getSimpleName().equals("TimbreFiscalDigital")) {
 				return (TimbreFiscalDigital) object;
@@ -189,8 +189,8 @@ public class ComprobanteHelper {
 
 	public static void calculaTotales(Comprobante comprobante) {
 		
-		comprobante.setImpuestos(new mx.gob.sat.cfd._3.Comprobante.Impuestos());
-        comprobante.getImpuestos().setTraslados(new mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados() );
+		comprobante.setImpuestos(new mx.gob.sat.cfd._4.Comprobante.Impuestos());
+        comprobante.getImpuestos().setTraslados(new mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados() );
         
         
         Conceptos c = comprobante.getConceptos();
@@ -211,7 +211,7 @@ public class ComprobanteHelper {
         	subtotal = subtotal.add(concepto.getImporte());			
         	
         	if(concepto.getImpuestos()==null || concepto.getImpuestos().getTraslados()==null)continue;
-        	for(mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado traslado :  concepto.getImpuestos().getTraslados().getTraslado()) {
+        	for(mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado traslado :  concepto.getImpuestos().getTraslados().getTraslado()) {
         		
         		String tasaOCuota = traslado.getTasaOCuota().stripTrailingZeros().toPlainString();
         		
@@ -227,7 +227,7 @@ public class ComprobanteHelper {
         	}
         	
         	if(concepto.getImpuestos()==null || concepto.getImpuestos().getRetenciones()==null)continue;
-        	for(mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos.Retenciones.Retencion retencion :  concepto.getImpuestos().getRetenciones().getRetencion()) {
+        	for(mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos.Retenciones.Retencion retencion :  concepto.getImpuestos().getRetenciones().getRetencion()) {
         		
         		
         		
@@ -247,7 +247,7 @@ public class ComprobanteHelper {
         
         
         for(String key : traslado_iva.keySet() ) {
-            mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados.Traslado tra = new mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados.Traslado();
+            mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados.Traslado tra = new mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados.Traslado();
             tra.setImpuesto("002");
             tra.setTipoFactor(CTipoFactor.TASA);
             tra.setTasaOCuota(new BigDecimal(key).setScale(6,RoundingMode.HALF_UP));
@@ -256,7 +256,7 @@ public class ComprobanteHelper {
             totalImpuestosTrasladados = totalImpuestosTrasladados.add(tra.getImporte()); 
         }
         for(String key : traslado_ieps.keySet() ) {
-            mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados.Traslado tra = new mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados.Traslado();
+            mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados.Traslado tra = new mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados.Traslado();
             tra.setImpuesto("003");
             tra.setTipoFactor(CTipoFactor.TASA);
             tra.setTasaOCuota(new BigDecimal(key).setScale(6));
@@ -267,11 +267,11 @@ public class ComprobanteHelper {
         
         
         if(retencionISR.compareTo(BigDecimal.ZERO)!=0 || retencionIVA.compareTo(BigDecimal.ZERO)!=0) {
-        	comprobante.getImpuestos().setRetenciones(new mx.gob.sat.cfd._3.Comprobante.Impuestos.Retenciones() );
+        	comprobante.getImpuestos().setRetenciones(new mx.gob.sat.cfd._4.Comprobante.Impuestos.Retenciones() );
         }
         
         if(retencionISR.compareTo(BigDecimal.ZERO)!=0) {
-        	mx.gob.sat.cfd._3.Comprobante.Impuestos.Retenciones.Retencion ret = new mx.gob.sat.cfd._3.Comprobante.Impuestos.Retenciones.Retencion();
+        	mx.gob.sat.cfd._4.Comprobante.Impuestos.Retenciones.Retencion ret = new mx.gob.sat.cfd._4.Comprobante.Impuestos.Retenciones.Retencion();
         	ret.setImpuesto("001");
         	ret.setImporte(retencionISR);        
             comprobante.getImpuestos().getRetenciones().getRetencion().add(ret);
@@ -279,7 +279,7 @@ public class ComprobanteHelper {
         	
         }
         if(retencionIVA.compareTo(BigDecimal.ZERO)!=0) {
-        	mx.gob.sat.cfd._3.Comprobante.Impuestos.Retenciones.Retencion ret = new mx.gob.sat.cfd._3.Comprobante.Impuestos.Retenciones.Retencion();
+        	mx.gob.sat.cfd._4.Comprobante.Impuestos.Retenciones.Retencion ret = new mx.gob.sat.cfd._4.Comprobante.Impuestos.Retenciones.Retencion();
         	ret.setImpuesto("002");
         	ret.setImporte(retencionIVA);        
             comprobante.getImpuestos().getRetenciones().getRetencion().add(ret);

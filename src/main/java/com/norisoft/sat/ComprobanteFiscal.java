@@ -79,7 +79,7 @@ import com.norisoft.sat.view.TimbreFiscalView;
 import com.sefactura.pac.client.RespuestaTimbrado;
 import com.sefactura.pac.client.Sefactura;
 
-import mx.gob.sat.cfd._3.Comprobante;
+import mx.gob.sat.cfd._4.Comprobante;
 
 public class ComprobanteFiscal {
 	
@@ -353,7 +353,7 @@ public class ComprobanteFiscal {
 			
 					
 	        
-	        Source  xslt_cadena_original= new StreamSource(ComprobanteFiscal.class.getResourceAsStream("/cadenaoriginal_3_3.xslt"));
+	        Source  xslt_cadena_original= new StreamSource(ComprobanteFiscal.class.getResourceAsStream("/cadenaoriginal_4_0.xslt"));
 	        Transformer transformer_cadena_original = factory.newTransformer(xslt_cadena_original);
 	        		
 			StringWriter outWriter = new StringWriter();					            
@@ -371,19 +371,19 @@ public class ComprobanteFiscal {
 		    String schema_pagos = "";
 		    
 		    if(isConComplementoPago()) {
-		    	schema_pagos = " http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd";
+		    	schema_pagos = " http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos20.xsd";
 		    }
 		    				    		
 		    //Genera el XML                                       
     		Marshaller jaxbMarshaller = jaxbContext_comprobante.createMarshaller();
     		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);    		
-    		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"+schema_pagos);
+    		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd"+schema_pagos);
     		
     		if(BANDER_VALIDAR_XSD) {
     			SchemaFactory factorySchema = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     			Schema schema =  factorySchema.newSchema(new Source[] {    					
-    					new StreamSource(ComprobanteFiscal.class.getResource("/cfdv33.xsd").toExternalForm()),
-    					new StreamSource(ComprobanteFiscal.class.getResource("/Pagos10.xsd").toExternalForm())    					    					  
+    					new StreamSource(ComprobanteFiscal.class.getResource("/cfdv40.xsd").toExternalForm()),
+    					new StreamSource(ComprobanteFiscal.class.getResource("/Pagos20.xsd").toExternalForm())    					    					  
     					});    			
     			jaxbMarshaller.setSchema(schema);
     		}

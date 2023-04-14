@@ -8,8 +8,8 @@ import java.util.List;
 import com.norisoft.sat.constantes.TipoImpuesto;
 
 import lombok.Data;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto;
-import mx.gob.sat.cfd._3.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto;
+import mx.gob.sat.cfd._4.Comprobante.Conceptos.Concepto.Impuestos.Traslados.Traslado;
 
 @Data
 public class ImpuestoView {
@@ -24,7 +24,7 @@ public class ImpuestoView {
 	
 	
 	
-	public ImpuestoView(mx.gob.sat.cfd._3.Comprobante.Impuestos  impuestos ) {
+	public ImpuestoView(mx.gob.sat.cfd._4.Comprobante.Impuestos  impuestos ) {
 		
 		
 		
@@ -33,7 +33,7 @@ public class ImpuestoView {
 		BigDecimal ieps = BigDecimal.ZERO;
 
 		
-		for (mx.gob.sat.cfd._3.Comprobante.Impuestos.Traslados.Traslado traslado : impuestos.getTraslados().getTraslado()) {
+		for (mx.gob.sat.cfd._4.Comprobante.Impuestos.Traslados.Traslado traslado : impuestos.getTraslados().getTraslado()) {
 			
 			if(traslado.getImpuesto().equals("002"))iva = iva.add(traslado.getImporte());
 			else if(traslado.getImpuesto().equals("003"))ieps = ieps.add(traslado.getImporte());
@@ -48,7 +48,7 @@ public class ImpuestoView {
 		
 		if(impuestos.getRetenciones()!=null) {
 			
-			for (mx.gob.sat.cfd._3.Comprobante.Impuestos.Retenciones.Retencion retencion : impuestos.getRetenciones().getRetencion()) {
+			for (mx.gob.sat.cfd._4.Comprobante.Impuestos.Retenciones.Retencion retencion : impuestos.getRetenciones().getRetencion()) {
 				
 				if(retencion.getImpuesto().equals("002")) {
 					ret_iva = ( ret_iva==null ? retencion.getImporte() : ret_iva.add(retencion.getImporte()) );
