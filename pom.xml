@@ -1,0 +1,170 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.norisoft.sat</groupId>
+  <artifactId>norisoft-sat</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>norisoft-sat</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>11</maven.compiler.release>
+  </properties>
+  
+  <dependencies>
+   <!-- junit 5 -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.4.0</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <!-- SeFactura java 11-->
+   <dependency>
+     <groupId>sefacturakit</groupId>
+     <artifactId>sefacturakit-java11</artifactId>
+     <scope>system</scope>
+     <version>1.0</version>
+     <systemPath>${basedir}/src/lib/sefacturakit-java11.jar</systemPath>
+   </dependency>	
+	       
+	<dependency>
+	    <groupId>jakarta.jws</groupId>
+	    <artifactId>jakarta.jws-api</artifactId>
+	    <version>2.1.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>jakarta.xml.ws</groupId>
+	    <artifactId>jakarta.xml.ws-api</artifactId>
+	    <version>2.3.3</version>
+	</dependency>
+	<dependency>
+		<groupId>com.sun.xml.ws</groupId>
+	    <artifactId>jaxws-rt</artifactId>
+	    <version>2.3.3</version>
+	    <scope>runtime</scope>
+	</dependency>	
+	
+			
+	<!-- Para la lectura de archivos PrivateKey -->
+	<dependency>
+	  <groupId>com.narupley</groupId>
+	  <artifactId>not-going-to-be-commons-ssl</artifactId>
+	  <version>0.3.20</version>
+	</dependency>
+
+
+
+
+	<!-- Templating -->   	
+	<dependency>
+	  <groupId>com.github.spullara.mustache.java</groupId>
+	  <artifactId>compiler</artifactId>
+	  <version>0.9.6</version>
+	</dependency>   
+	<!-- HTML A PDF-->
+	<dependency>
+	    <groupId>com.itextpdf</groupId>
+	    <artifactId>itextpdf</artifactId>
+	    <version>5.5.13.1</version>
+	</dependency>
+	<!-- HTML A PDF-->
+	<dependency>
+	    <groupId>org.xhtmlrenderer</groupId>
+	    <artifactId>flying-saucer-pdf</artifactId>
+	    <version>9.1.20</version>
+	</dependency>
+		
+	<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+	<dependency>
+	    <groupId>org.apache.logging.log4j</groupId>
+	    <artifactId>log4j-core</artifactId>
+	    <version>2.12.1</version>
+	</dependency>
+		
+	
+	<dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<version>1.18.12</version>
+		<scope>provided</scope>
+	</dependency>
+					
+		  
+  </dependencies>
+  
+  
+  <build>
+		<plugins>
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.14.0</version>
+			    <configuration>
+			        <schemaDirectory>src/main/resources</schemaDirectory>			        
+			        <schemaIncludes>
+			            <include>cfdv33.xsd</include>
+			            <include>Pagos10.xsd</include>			            
+			            <include>TimbreFiscalDigitalv11.xsd</include>
+			            
+			        </schemaIncludes>
+			        <bindingDirectory>src/main/resources</bindingDirectory>
+			        <bindingIncludes>
+			            <include>bindings.xml</include>
+			            <include>binding.xjb</include>
+			            <include>binding2.xml</include>
+			            
+			        </bindingIncludes>
+			        <args>
+			            <arg>-extension</arg>
+			            <arg>-Xannotate</arg>			            
+			            <arg>-Xnamespace-prefix</arg>
+			        </args>
+			    </configuration>				
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			    <dependencies>
+			        <dependency>
+			            <groupId>org.jvnet.jaxb2_commons</groupId>
+			            <artifactId>jaxb2-namespace-prefix</artifactId>
+			            <version>1.3</version>
+			        </dependency>
+			        <!-- https://mvnrepository.com/artifact/org.jvnet.jaxb2_commons/jaxb2-basics-annotate -->
+					<dependency>
+					    <groupId>org.jvnet.jaxb2_commons</groupId>
+					    <artifactId>jaxb2-basics-annotate</artifactId>
+					    <version>1.1.0</version>
+					</dependency>
+								        
+			    </dependencies>				
+			</plugin>
+			<!-- Need at least 2.22.0 to support JUnit 5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M3</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+					<release>11</release>
+                </configuration>
+            </plugin>
+			
+		</plugins>
+	</build>
+	
+</project>

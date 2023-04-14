@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings 
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:annox="http://annox.dev.java.net"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+	version="2.1">
+	
+	<jaxb:bindings schemaLocation="cfdv33.xsd" node="/xs:schema">
+		<jaxb:bindings  node="//xs:element[@name='Complemento']">					
+			<annox:annotate target="class">
+                
+                @javax.xml.bind.annotation.XmlSeeAlso({mx.gob.sat.pagos.Pagos.class, mx.gob.sat.timbrefiscaldigital.TimbreFiscalDigital.class})
+                
+            </annox:annotate> 
+		</jaxb:bindings >
+	
+			   
+	</jaxb:bindings>
+	
+
+</jaxb:bindings>

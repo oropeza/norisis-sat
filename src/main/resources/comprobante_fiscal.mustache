@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<style type="text/css">
+	body{
+	font-size: 10px;
+	font-family: Verdana,sans-serif;	
+	//background-color:red;
+	}
+	
+	.numero_texto{
+	font-size: 10px;
+	float: right;
+	}
+		
+	.center{
+	text-align: center;	
+	}
+
+	@page {
+	    margin-top: 0.5cm;
+	    margin-bottom: 0.5cm;
+	    margin-left: 0.5cm;
+	    margin-right: 0.5cm;
+	}	
+	
+	.text-right{
+		text-align:right;
+	}
+
+table.conceptos {
+  border-collapse: collapse;
+}
+
+table.conceptos, .conceptos th, .conceptos td {
+  border: 1px solid black;
+}
+
+#timbre_fiscal{
+
+ 
+}
+
+#timbre_fiscal_main td{
+	vertical-align: top;
+}
+
+#timbre_fiscal td{
+
+}
+pre{
+	margin:0px;
+}
+
+div.header {
+    display: block; text-align: center; 
+    position: running(header);
+}
+div.footer {
+    display: block; text-align: center;
+    position: running(footer);
+}
+div.content {page-break-after: always;}
+@page {
+     @top-center { content: element(header) }
+}
+@page { 
+    @bottom-center { content: element(footer) }
+}
+
+.mute{
+	color: #6c757d!important;
+	font-size: 80%;
+    font-weight: 400;
+}
+</style>
+</head>
+
+<body>
+<div class='header'></div>
+<div class='footer'>Este documento es una representación impresa de un CFDI</div>
+<h1 class="center" style="margin: 0px; font-size: 16px;">{{comprobante.Emisor.nombre}}</h1>
+
+<table width="100%" border="0">
+<tr>
+	<td style="width: 30%;text-align:center;">		
+		<img src="{{{logo_image}}}" width="150px"  />
+		</td>
+	<td style="width: 35%;" align="center">
+		<p style="font-size:10px;">RFC: <b>{{comprobante.Emisor.rfc}}</b></p><br/>
+		Lugar de Expedición: {{comprobante.lugarExpedicion}}<br></br>
+		Régimen fiscal: {{regimen_fiscal.clave}} {{regimen_fiscal.descripcion}}<br></br>
+
+	</td>
+	<td style="width: 35%;">
+	<b>{{tipo_comprobante.clave}} {{tipo_comprobante.descripcion}}</b><br/>
+	
+	{{#factura_id}}<b>ID.:</b> {{.}}<br/>{{/factura_id}}
+	{{#comprobante.folio}}<b>Folio.:</b> {{comprobante.serie}} {{comprobante.folio}}<br/>{{/comprobante.folio}}
+		 
+	<b>Fecha de Expedición:</b> {{comprobante.fecha}}<br/>
+	<b>Forma de Pago:</b>  {{forma_pago.clave}} {{forma_pago.descripcion}} <br/>
+	<b>Método de Pago:</b> {{metodo_pago.clave}} {{metodo_pago.descripcion}} <br/>
+	<b>Moneda:</b>  {{moneda.clave}} {{moneda.descripcion}}<br/>
+	<b>Uso CFDI:</b> {{uso_cfdi.clave}} {{uso_cfdi.descripcion}}<br></br>
+
+</td>
+</tr>
+</table>
+<hr/>
+<p>
+<b>Receptor:</b> <br/>
+Nombre: {{receptor.nombre}}<br/> 
+RFC: {{receptor.rfc}}<br/>
+{{#receptor_email}}Email: {{.}}<br/>{{/receptor_email}}
+{{#receptor_direccion_fiscal}}Dirección Fiscal: {{.}}<br/>{{/receptor_direccion_fiscal}}
+{{#receptor.numRegIdTrib}}Número registro identidad fiscal: {{.}}<br/>{{/receptor.numRegIdTrib}}
+</p>
+<b>Conceptos:</b> <br/>
+<br/>
+
+<table  width="100%" class="conceptos">
+<thead>
+<tr>
+<td>ClaveProdServ</td>
+<td>ClaveUnidad</td>
+<td>Descripción</td>
+<td>Valor Unitario</td>
+<td>Cantidad</td>
+<td>Importe</td>
+<td>Impuesto</td>
+</tr>
+</thead>
+{{#conceptos}}
+<tr>
+  <td>{{claveProdServ}}</td>
+  <td>{{claveUnidad}} {{unidad}}</td>
+  <td>{{descripcion}}</td>
+  <td class="text-right">{{valorUnitario}}</td>
+  <td class="text-right">{{cantidad}}</td>
+  <td class="text-right">{{importe}}</td>
+  <td class="text-right">
+  {{#impuestos}}
+  	<div>
+    Traslado {{importe}}<br/><span class="mute">{{impuesto}}</span>
+    </div>	
+  {{/impuestos}}
+  
+  
+  {{#retenciones}}
+  	<div>
+    Retención {{importe}}<br/><span class="mute">{{impuesto}}</span>
+    </div>	
+  {{/retenciones}}
+  
+  
+  
+  </td>
+  
+</tr>
+{{/conceptos}}
+</table>
+
+
+
+
+
+
+<table width="30%" border="0" style="float:right;">
+<tr><td>Subtotal</td><td class="text-right">{{subtotal}}</td></tr>
+<tr><td>Traslado IVA</td><td class="text-right">{{impuesto_view.iva}}</td></tr>
+{{#impuesto_view.ieps}}<<tr><td>Traslado IEPS</td><td class="text-right">{{impuesto_view.ieps}}</td></tr>{{/impuesto_view.ieps}}
+{{#impuesto_view.retencionISR}}<tr><td>Retención ISR</td><td class="text-right">{{.}}</td></tr>{{/impuesto_view.retencionISR}}
+
+{{#impuesto_view.retencionIVA}}<tr><td>Retención IVA</td><td class="text-right">{{.}}</td></tr>{{/impuesto_view.retencionIVA}}
+
+
+<tr><td><b>Total</b></td><td class="text-right"><b>{{total}}</b></td></tr>
+</table>
+<div style="clear:right;"></div>
+<hr/>
+
+<img src="{{{qr_image}}}" width="100" style="float:right;" />
+<br/>
+<b>Timbre Fiscal:</b> <br/>
+
+<br/>
+		
+<table id="timbre_fiscal_main" border="0" >
+<tr><td  width="100">UUID</td><td>{{timbre_fiscal.UUID}}</td>
+	
+</tr>
+<tr><td>Fecha Timbrado</td><td>{{timbre_fiscal.fechaTimbrado}}</td></tr>
+<tr><td>No Certificado </td><td>{{timbre_fiscal.noCertificado}}</td></tr>
+<tr><td>No Certificado SAT</td><td>{{timbre_fiscal.noCertificadoSAT}}</td></tr>
+<tr><td>Rfc Prov Certif</td><td>{{timbre_fiscal.rfcProvCertif}}</td></tr>
+
+</table>
+
+
+<table id="timbre_fiscal" border="0" width="100%">
+<tr><td width="100">Sello CFD</td><td>
+<pre>{{{timbre_fiscal.selloCFD}}}</pre>
+</td></tr>
+<tr><td>Sello SAT</td><td><pre>{{{timbre_fiscal.selloSAT}}}</pre></td></tr>
+<tr>
+<td>Cadena Original Complemento Certificación</td><td><pre>{{{timbre_fiscal.cadenaOriginal}}}</pre></td>
+</tr>
+</table>
+</body>
+</html>
+
+
+
