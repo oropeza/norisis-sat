@@ -95,7 +95,34 @@ class ComprobanteFiscalITest {
     }
     
     
+    @Test    
+    @DisplayName("Timbrado Retencion")
+    void prueba_de_timbrado_retencion() {
+    	
+		InputStream cer = ComprobanteFiscalITest.class.getResourceAsStream(getCertificadoCerFile());
+		InputStream key = ComprobanteFiscalITest.class.getResourceAsStream(getCertificadoKeyFile());
+		String clave = prop.getProperty("sat.certificado.clave");
+		
+		assertNotNull(cer);
+		assertNotNull(key);
+		
+		Comprobante c =  ComprobantesDummyFactory.getComprobanteRetencion();
+		
+		
+		ComprobanteFiscal comprobante_fiscal = ComprobanteFiscalFactory.getComprobante(c);
+		comprobante_fiscal.validar_xsd(true);		
+		comprobante_fiscal.carga_certificado(cer,key,clave);
+		comprobante_fiscal.genera_comprobante_timbrado();
+		
+		
+		assertNotNull(comprobante_fiscal.getComprobante_timbrado_xml());
+		assertNotNull(comprobante_fiscal.getComprobante_timbrado_pdf());
 
+		assertNotNull(comprobante_fiscal.getComprobante_timbrado_xml().toFile().exists());
+		assertNotNull(comprobante_fiscal.getComprobante_timbrado_pdf().toFile().exists());
+
+        
+    }
     @Disabled
     void lectura_de_archivo_xml() throws URISyntaxException {
     	

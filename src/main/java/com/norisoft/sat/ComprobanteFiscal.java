@@ -377,7 +377,7 @@ public class ComprobanteFiscal {
 		    //Genera el XML                                       
     		Marshaller jaxbMarshaller = jaxbContext_comprobante.createMarshaller();
     		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);    		
-    		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd"+schema_pagos);
+    		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd"+schema_pagos);
     		
     		if(BANDER_VALIDAR_XSD) {
     			SchemaFactory factorySchema = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);

@@ -1,5 +1,6 @@
 package com.norisoft.sat;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -8,11 +9,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Properties;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+
 
 import mx.gob.sat.cfd._4.Comprobante;
 import mx.gob.sat.cfd._4.ObjectFactory;
@@ -35,7 +39,27 @@ import mx.gob.sat.timbrefiscaldigital.TimbreFiscalDigital;
 
 public class ComprobantesDummyFactory {
 	
+
+	static Properties prop = null;
 	
+	public static Properties getProp() {
+		
+		if(prop==null) {
+		
+			try {
+				prop = new Properties();
+				prop.load(ComprobantesDummyFactory.class.getResourceAsStream("/facturacion.properties"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+			
+		return prop;
+	}
+	
+	public static Comprobante getComprobanteRetencion() {
+		return generaComprobanteRetencion();
+	}
 	
 	public static Comprobante getComprobanteCompra() {
 		return generaComprobante();
@@ -172,9 +196,10 @@ public class ComprobantesDummyFactory {
 	private static Emisor generaEmisor() {
 		   
         Emisor emisor = new Emisor();
-        emisor.setRfc("CACX7605101P8");
-        emisor.setNombre("Norisoft Consultores S.A. de C.V.");
-        emisor.setRegimenFiscal("601");
+        emisor.setRfc(getProp().getProperty("sat.emisor.rfc"));
+        emisor.setNombre(getProp().getProperty("sat.emisor.nombre"));
+        emisor.setRegimenFiscal(getProp().getProperty("sat.emisor.regimen"));
+                
         return emisor;
 		
 	}
@@ -182,9 +207,13 @@ public class ComprobantesDummyFactory {
 	private static Receptor generaReceptor() {
         
         Receptor receptor = new Receptor();
-        receptor.setRfc("XAXX010101000");
-        receptor.setNombre("JUAN JORGE SANCHEZ PEREZ");
+        receptor.setRfc(getProp().getProperty("sat.receptor.rfc"));
+        receptor.setNombre(getProp().getProperty("sat.receptor.nombre"));
+        receptor.setDomicilioFiscalReceptor(getProp().getProperty("sat.receptor.cp"));
+        receptor.setRegimenFiscalReceptor(getProp().getProperty("sat.receptor.regimen"));
         receptor.setUsoCFDI(CUsoCFDI.G_03);
+        
+        
         
         return receptor;
 	}
@@ -209,7 +238,7 @@ public class ComprobantesDummyFactory {
 	        comprobante.setFormaPago("01");
 	             
 	        comprobante.setMoneda(CMoneda.MXN);
-	        comprobante.setVersion("3.3");
+	        comprobante.setVersion("4.0");
 	        comprobante.setFecha(xmlGregCal);
 	
 	        
@@ -245,14 +274,15 @@ public class ComprobantesDummyFactory {
 	        Comprobante comprobante = factory.createComprobante();
 	        
 	        
-	        comprobante.setLugarExpedicion("03550");
+	        comprobante.setLugarExpedicion(getProp().getProperty("sat.emisor.cp"));
 	        comprobante.setMetodoPago(CMetodoPago.PUE);
 	        comprobante.setCondicionesDePago("Contado");
 	        comprobante.setFormaPago("01");
 	        comprobante.setTipoDeComprobante(CTipoDeComprobante.I);	        
 	        comprobante.setMoneda(CMoneda.MXN);
-	        comprobante.setVersion("3.3");
+	        comprobante.setVersion("4.0");
 	        comprobante.setFecha(xmlGregCal);
+	        comprobante.setExportacion("01");
 	
 	        
 	        comprobante.setEmisor(generaEmisor());
@@ -284,6 +314,57 @@ public class ComprobantesDummyFactory {
 
 	}
 
+	
+	private static Comprobante generaComprobanteRetencion() {
+		try {
+	        
+	        	
+	        GregorianCalendar cal = new GregorianCalendar();
+	        cal.setTime(new Date());
+	
+	        XMLGregorianCalendar xmlGregCal =  DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
+	        xmlGregCal.setTimezone(DatatypeConstants.FIELD_UNDEFINED);
+	        xmlGregCal.setMillisecond(DatatypeConstants.FIELD_UNDEFINED);
+	        
+	        ObjectFactory factory = new ObjectFactory();
+	        
+	        Comprobante comprobante = factory.createComprobante();
+	        
+	        
+	        comprobante.setLugarExpedicion(getProp().getProperty("sat.emisor.cp"));
+	        comprobante.setMetodoPago(CMetodoPago.PUE);
+	        comprobante.setCondicionesDePago("Contado");
+	        comprobante.setFormaPago("01");
+	        comprobante.setTipoDeComprobante(CTipoDeComprobante.I);	        
+	        comprobante.setMoneda(CMoneda.MXN);
+	        comprobante.setVersion("4.0");
+	        comprobante.setFecha(xmlGregCal);
+	        comprobante.setExportacion("01");
+	
+	        
+	        comprobante.setEmisor(generaEmisor());
+	        comprobante.setReceptor(generaReceptor());
+	        
+
+	  	  ComprobanteHelper.creaConcepto(comprobante, 
+	          		"81111808", "E48","servicio", "Consultoria",
+	          		new BigDecimal("30000"), new BigDecimal("1"), "002", new BigDecimal("0.160000"),
+	          		new BigDecimal("10.66667"),new BigDecimal("10"));
+	        
+	        
+	        
+	        ComprobanteHelper.calculaTotales(comprobante);
+	        
+	        
+	        return comprobante;
+		
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 	
 	public static Comprobante generaComplementoPago() {
 		try {

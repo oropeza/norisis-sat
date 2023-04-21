@@ -70,6 +70,44 @@ class ComprobanteHelperTest {
     }
         
 
-
+    @Test
+    @DisplayName("Compra con retenciones")
+    void verifica_calculo_retenciones() {
+    	Comprobante comprobante =  ComprobantesDummyFactory.getComprobante();
+    	  
+        
+    	  ComprobanteHelper.creaConcepto(comprobante, 
+          		"81111808", "E48","servicio", "Consultoria",
+          		new BigDecimal("30000"), new BigDecimal("1"), "002", new BigDecimal("0.160000"),
+          		new BigDecimal("10.66667"),new BigDecimal("10"));
+        
+        ComprobanteHelper.calculaTotales(comprobante);
+        
+        assertEquals(0,comprobante.getSubTotal().compareTo(new  BigDecimal("30000")));
+        assertEquals(0,comprobante.getTotal().compareTo(new  BigDecimal("28600")));
+        assertEquals(0,comprobante.getImpuestos().getTotalImpuestosTrasladados().compareTo(new  BigDecimal("4800")));
+        assertEquals(0,comprobante.getImpuestos().getTotalImpuestosRetenidos().compareTo(new  BigDecimal("6200")));
+        
+    }
+    
+    @Test
+    @DisplayName("Compra con retenciones 2")
+    void verifica_calculo_retenciones_dos() {
+    	Comprobante comprobante =  ComprobantesDummyFactory.getComprobante();
+    	  
+        
+    	  ComprobanteHelper.creaConcepto(comprobante, 
+          		"81111808", "E48","servicio", "Consultoria",
+          		new BigDecimal("4350"), new BigDecimal("1"), "002", new BigDecimal("0.160000"),
+          		new BigDecimal("10.66667"),new BigDecimal("10"));
+        
+        ComprobanteHelper.calculaTotales(comprobante);
+        
+        assertEquals(0,comprobante.getSubTotal().compareTo(new  BigDecimal("4350")));
+        assertEquals(0,comprobante.getTotal().compareTo(new  BigDecimal("4147.00")));
+        assertEquals(0,comprobante.getImpuestos().getTotalImpuestosTrasladados().compareTo(new  BigDecimal("696")));
+        assertEquals(0,comprobante.getImpuestos().getTotalImpuestosRetenidos().compareTo(new  BigDecimal("899")));
+        
+    }    
 
 }
